@@ -1,0 +1,18 @@
+import openfabric_api
+
+def test_model_deployment():
+    # Initialize Openfabric API client
+    client = openfabric_api.Client(api_key='YOUR_API_KEY')
+
+    # Test positive scenario: Valid model deployment
+    model_file = 'path/to/model.pb'
+    deployment_response = client.deploy_model(model_file)
+    assert deployment_response.status_code == 200, "Failed to deploy model"
+
+    # Test negative scenario: Invalid model format
+    invalid_model_file = 'path/to/invalid_model.txt'
+    invalid_deployment_response = client.deploy_model(invalid_model_file)
+    assert invalid_deployment_response.status_code == 400, "Invalid model format not detected"
+
+if __name__ == "__main__":
+    test_model_deployment()
